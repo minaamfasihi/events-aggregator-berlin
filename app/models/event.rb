@@ -10,5 +10,7 @@ class Event < ApplicationRecord
   scope :coberlin, -> { where("web_source_id = ?", WebSource.find_by(title: 'Co_Berlin')&.id) }
   scope :berghain, -> { where("web_source_id = ?", WebSource.find_by(title: 'Berghain')&.id) }
   scope :by_title, -> (title) { where("title ILIKE :title", title: "%#{title}%") }
-  scope :by_date, -> (start_date, end_date) { where("event_start_date >= ? OR event_end_date <= ?", start_date, end_date)}
+  scope :by_start_date, -> (start_date) { where("event_start_date = ?", start_date) }
+  scope :by_end_date, -> (end_date) { where("event_end_date = ?", end_date) }
+  scope :by_start_end_date, -> (start_date, end_date) { where("event_start_date >= ? AND event_end_date <= ?", start_date, end_date) }
 end

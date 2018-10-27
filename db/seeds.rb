@@ -7,14 +7,17 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 sources = {
-  "Co_Berlin" => "https://www.co-berlin.org/en/calender",
-  "Berghain" => "http://berghain.de/events",
+  "Co_Berlin" => ["https://www.co-berlin.org/en/calender", 
+                  "https://www.co-berlin.org"],
+  "Berghain" => ["http://berghain.de/events/", 
+                  "http://berghain.de"],
 }
 
-sources.each do |title, url|
+sources.each do |title, urls|
   WebSource.create!(
     title: title,
-    url: url
+    url: urls[0],
+    base_url: urls[1]
   )
 end
 

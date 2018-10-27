@@ -23,7 +23,7 @@ class ScrapingService
     events.each do |event|
       begin
         event_content = event.css('.calender-text')
-        event_url = [source.url, event_content&.css('a')&.attribute('href')&.value].join()
+        event_url = [source.base_url, event_content&.css('a')&.attribute('href')&.value].join()
         image_url = event.css('.calender-image')&.css('img')&.css('img')&.attribute('src')&.value
         event_category = event_content&.css('.article-category')&.text
         event_start_date = event_content&.css('.date-display-start')[0]&.text
@@ -62,7 +62,7 @@ class ScrapingService
 
     events.each do |event|
       begin
-        event_url = [source.url, event&.css('a')&.attribute('href')&.value].join()
+        event_url = [source.base_url, event&.css('a')&.attribute('href')&.value].join()
         event_date_container = event&.css('a')&.attribute('title')&.value&.split(':')
         event_date = event_date_container[0] if event_date_container.present?
         event_title = event&.css('a')&.css('span')&.text
@@ -73,7 +73,7 @@ class ScrapingService
           title: event_title.to_s,
           details: event_details.to_s,
           event_start_date: event_date ? 
-                            Date.parse(event_date) 
+                            Date.parse(event_date)
                             : 
                             nil,
           event_url: event_url.to_s,

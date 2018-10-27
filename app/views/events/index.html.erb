@@ -12,7 +12,6 @@
             <tbody>
               <% if @events.blank? %>
                 <p class='no-results'>Sorry, no results found</p>
-
               <% else %>
                 <% @events.each do |event| %>
                   <% if event.title.present? && event.event_url.present? %>
@@ -20,14 +19,14 @@
                       <td>
                         <div class='row'>
                           <div class='col-md-3'>
-                            <%= link_to event.event_url do %>
+                            <%= link_to event.event_url, target: :_blank do %>
                               <p><%= event&.category&.titleize %></p>
                               <p><%= render_date(event&.event_start_date, event&.event_end_date) %></p>
                               <h2><strong><%= event.title %></strong></h2>
                               <%= image_tag event.img_url, class: 'event-img' if event.img_url.present? %>
                               <p><%= event&.subtitle %></p>
                               <p class='text-justify'>
-                                <%= truncate(sanitize(event&.details&.capitalize), length: 200) %>
+                                <%= truncate(sanitize(event&.details&.capitalize), length: 250) %>
                               </p>
                             <% end %>
                           </div>
