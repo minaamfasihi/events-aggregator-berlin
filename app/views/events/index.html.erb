@@ -22,11 +22,11 @@
                             <%= link_to event.event_url, target: :_blank do %>
                               <p><%= event&.category&.titleize %></p>
                               <p><%= render_date(event&.event_start_date, event&.event_end_date) %></p>
-                              <h2><strong><%= event.title %></strong></h2>
+                              <h2><strong><%= event.title.titleize %></strong></h2>
                               <%= image_tag event.img_url, class: 'event-img' if event.img_url.present? %>
-                              <p><%= event&.subtitle %></p>
+                              <p><%= event&.subtitle&.titleize %></p>
                               <p class='text-justify'>
-                                <%= truncate(sanitize(event&.details&.capitalize), length: 250) %>
+                                <%= truncate(sanitize(event&.details&.titleize), length: 250) %>
                               </p>
                             <% end %>
                           </div>

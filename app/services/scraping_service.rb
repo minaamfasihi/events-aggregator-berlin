@@ -25,7 +25,7 @@ class ScrapingService
         event_content = event.css('.calender-text')
         event_url = [source.base_url, event_content&.css('a')&.attribute('href')&.value].join()
         image_url = event.css('.calender-image')&.css('img')&.css('img')&.attribute('src')&.value
-        event_category = event_content&.css('.article-category')&.text
+        event_category = event_content&.css('.article-category')&.text&.strip
         event_start_date = event_content&.css('.date-display-start')[0]&.text
         
         unless event_start_date.present?
@@ -33,9 +33,9 @@ class ScrapingService
         end
 
         event_end_date = event_content&.css('.date-display-end')[0]&.text
-        event_title = event_content&.css('.article-title')&.text
-        event_subtitle = event_content&.css('.article-subtitle')&.text
-        event_details = event_content&.css('.article-text')&.text
+        event_title = event_content&.css('.article-title')&.text&.strip
+        event_subtitle = event_content&.css('.article-subtitle')&.text&.strip
+        event_details = event_content&.css('.article-text')&.text&.strip
 
         source.events.find_or_create_by(
           title: event_title.to_s, 
@@ -65,9 +65,11 @@ class ScrapingService
         event_url = [source.base_url, event&.css('a')&.attribute('href')&.value].join()
         event_date_container = event&.css('a')&.attribute('title')&.value&.split(':')
         event_date = event_date_container[0] if event_date_container.present?
-        event_title = event&.css('a')&.css('span')&.text
-        event_category = event&.css('.type_stage_color')&.css('span')&.css('b')&.text
-        event_details = event&.css('.type_stage_color')&.css('span')&.text&.slice! event_category
+        event_title = event&.css('a')&.css('span')&.text&.strip
+        event_category = event&.css('.type_stage_color')&.css('span')&.css('b')&.text&.strip
+        event_category = event&.css('.type_dancefloor_color')&.css('span')&.css('b')&.text&.strip if event_category.blank?
+        event_details = event&.css('.type_stage_color')&.css('span')&.text&.strip&.gsub(event_category, '')
+        event_details = event&.css('.type_dancefloor_color')&.css('span')&.text&.strip&.gsub(event_category, '') if event_details.blank?
 
         source.events.find_or_create_by(
           title: event_title.to_s,
