@@ -1,13 +1,10 @@
 class ScrapingService
   require 'open-uri'
   require 'nokogiri'
+  require 'sidekiq-scheduler'
   include Sidekiq::Worker
 
-  def perform_async(name, count)
-    scrape
-  end
-
-  def self.scrape
+  def perform(*args)
     web_sources = WebSource.all
     
     web_sources.each do |source|
@@ -21,7 +18,7 @@ class ScrapingService
     end
   end
 
-  def self.scrape_co_berlin(web_page, source)
+  def scrape_co_berlin(web_page, source)
     events = web_page.css('.seite-c-single')
     events.each do |event|
       begin
@@ -60,7 +57,7 @@ class ScrapingService
     end
   end
 
-  def self.scrape_berghain(web_page, source)
+  def scrape_berghain(web_page, source)
     events = web_page.css('.marker')
 
     events.each do |event|
