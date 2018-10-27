@@ -1,0 +1,41 @@
+<div id='container'>
+  <div class='row'>
+    <div class='col-md-10'>
+      <%= render 'search' %>
+      <div class='panel panel-default'>
+        <div class='panel-body'>
+          <h2 class='text-center'>Events</h2>
+          <div class='clearfix'></div>
+          <table class='table table-striped table-hover'>
+            <thead class='thead-default'>
+            </thead>
+            <tbody>
+              <% @events.each do |event| %>
+                <% if event.title.present? && event.event_url.present? %>
+                  <tr>
+                    <td>
+                      <div class='row'>
+                        <div class='col-md-3'>
+                          <%= link_to event.event_url do %>
+                            <p><%= event&.category&.titleize %></p>
+                            <p><%= render_date(event&.event_start_date, event&.event_end_date) %></p>
+                            <h2><strong><%= event.title %></strong></h2>
+                            <%= image_tag event.img_url, class: 'event-img' if event.img_url.present? %>
+                            <p><%= event&.subtitle %></p>
+                            <p class='text-justify'>
+                              <%= truncate(sanitize(event&.details&.capitalize), length: 200) %>
+                            </p>
+                          <% end %>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
