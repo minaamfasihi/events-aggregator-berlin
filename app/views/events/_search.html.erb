@@ -1,0 +1,42 @@
+<div class='well search-area'>
+  <%= form_tag events_path, method: :get do %>
+    <div class='row'>
+      <div class='form-group'>
+        <div class='input-group col-xs-4'>
+          <%= text_field_tag :title, params[:title], class: 'form-control', placeholder: 'Title' %>
+        </div>
+      </div>
+
+      <div class='form-group'>
+        <div class='input-group'>
+          <span class='input-group-addon'>
+            <i class='glyphicon glyphicon-facetime-video'></i>
+            Web Source:
+          </span>
+          <%= select_tag :web_source_id, options_for_select(@web_sources.collect { |ws| [ws.title, ws.id] }, params[:web_source_id]), include_blank: 'Select a Web Source', class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class='form-group'>
+        <div class='input-group col-xs-4'>
+          <span class='input-group-addon'>
+            <i class='glyphicon glyphicon-time'></i> 
+            Start date:
+          </span>
+          <%= date_field_tag :event_start_date, params[:event_start_date], class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class='form-group'>
+        <div class='input-group col-xs-4'>
+          <span class='input-group-addon'>
+            <i class='glyphicon glyphicon-time'></i>
+            End Date:
+          </span>
+          <%= date_field_tag :event_end_date, params[:event_end_date], class: 'form-control' %>
+        </div>
+      </div>
+    </div>
+    <%= submit_tag 'Submit', class: 'btn btn-primary' %>
+  <% end %>
+</div>

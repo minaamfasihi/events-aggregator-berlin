@@ -12,8 +12,8 @@ class ScrapingService
         web_page = Nokogiri::HTML(open(source.url))
         scrape_co_berlin(web_page, source) if source.title == "Co_Berlin"
         scrape_berghain(web_page, source) if source.title == "Berghain"
-      rescue
-        p("Some error occurred, skipping")
+      rescue StandardError => e
+        p("Some error occurred, skipping: #{e.inspect}")
       end
     end
   end

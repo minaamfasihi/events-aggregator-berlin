@@ -1,4 +1,4 @@
 :schedule:
   scraping_service:
-    every: '60m'
+    every: '30m'
     class: ScrapingService
