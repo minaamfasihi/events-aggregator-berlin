@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_27_145402) do
+ActiveRecord::Schema.define(version: 2018_10_28_093712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2018_10_27_145402) do
     t.text "img_url"
     t.string "category"
     t.string "subtitle"
+    t.index ["event_end_date"], name: "index_events_on_event_end_date"
     t.index ["event_start_date"], name: "index_events_on_event_start_date"
     t.index ["web_source_id"], name: "index_events_on_web_source_id"
   end
