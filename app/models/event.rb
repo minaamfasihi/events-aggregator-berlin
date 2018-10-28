@@ -1,4 +1,6 @@
 class Event < ApplicationRecord
+  paginates_per 25
+
   belongs_to :web_source
 
   validates :title, presence: true, length: { in: 2..1000,

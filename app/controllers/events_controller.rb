@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   before_action :set_web_sources, only: [:index]
 
   def index
-    @events = Event.all
+    @events = Event.page(params[:page]).per(25)
     @events = @events.by_title(params[:title]) if params[:title].present?
     @events = by_web_source(@events, params[:web_source_id].to_i) if params[:web_source_id].present?
     @events = by_date(@events, params[:event_start_date], params[:event_end_date]) if params[:event_start_date].present? || params[:event_end_date].present?
