@@ -1,4 +1,7 @@
 <%= render 'search' %>
+
+<div class='row mt-2'></div>
+
 <% if @events.blank? %>
   <p class='no-results'>Sorry, no results found</p>
 <% else %>
@@ -6,7 +9,7 @@
     <div class='row'>
       <% @events.each do |event| %>
         <% if event.title.present? && event.event_url.present? %>
-          <div class='col-lg-4 col-sm-6 portfolio-item'>
+          <div class='col-lg-4 col-sm-6 portfolio-item mt-4'>
             <div class='card h-100'>
               <%= link_to event.event_url, target: :_blank do %>
                 <%= image_tag event.img_url, class: 'card-img-top' if event.img_url.present? %>
@@ -15,18 +18,10 @@
                     <strong><%= event.title.titleize %></strong>
                   </h4>
 
-                  <p class='card-text'>
-                    <%= event&.category&.titleize %>
-                  </p>
-                  <p class='card-text'>
-                    <%= render_date(event&.event_start_date, event&.event_end_date) %>
-                  </p>
-                  <p class='card-text'>
-                    <%= event&.subtitle&.titleize %>
-                  </p>
-                  <p class='card-text'>
-                    <%= truncate(sanitize(event&.details&.titleize), length: 250) %>
-                  </p>
+                  <p class='card-text'><%= event&.category&.titleize %></p>
+                  <p class='card-text'><%= render_date(event&.event_start_date, event&.event_end_date) %></p>
+                  <p class='card-text'><%= event&.subtitle&.titleize %></p>
+                  <p class='card-text'><%= truncate(sanitize(event&.details&.titleize), length: 250) %></p>
                 </div>
               <% end %>
             </div>
@@ -38,7 +33,7 @@
   </div>
 <% end %>
 
-<footer class="py-5 bg-dark">
+<footer class="py-5 bg-dark footer">
   <div class="container">
     <p class="m-0 text-center text-white">Copyright &copy; Dalia Research 2018</p>
   </div>

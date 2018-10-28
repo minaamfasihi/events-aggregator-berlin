@@ -11,7 +11,7 @@
       <div class='col-sm-3'>
         <div class='form-group'>
           <label for='web_source'>
-            Web Source: 
+            Web Source 
           </label>
           <%= select_tag :web_source_id, options_for_select(@web_sources.collect { |ws| [ws.title, ws.id] }, params[:web_source_id]), include_blank: 'Select a Web Source', class: 'form-control' %>
         </div>
@@ -20,7 +20,7 @@
       <div class='col-sm-3'>
         <div class='form-group'>
           <label for='event_start_date'>
-            Start Date: 
+            Start Date 
           </label>
           <%= date_field_tag :event_start_date, params[:event_start_date], class: 'form-control' %>
         </div>
