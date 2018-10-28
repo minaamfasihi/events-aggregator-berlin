@@ -6,7 +6,7 @@ class Event < ApplicationRecord
    }
   validates :event_start_date, presence: true
   validates :event_url, presence: true, length: { maximum: 1000 }
-  validates :details, :event_url, :img_url, length: { maximum: 1000 }
+  validates :details, :img_url, length: { maximum: 1000 }
   validates :category, :subtitle, length: { maximum: 150 }
 
   scope :coberlin, -> { where("web_source_id = ?", WebSource.find_by(title: 'Co_Berlin')&.id) }

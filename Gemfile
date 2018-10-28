@@ -70,6 +70,8 @@ group :test do
   gem 'faker'
   gem 'simplecov', :require => false
   gem 'simplecov-rcov'
+  gem 'phantomjs'
+  gem 'poltergeist'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
