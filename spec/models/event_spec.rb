@@ -37,29 +37,29 @@ describe Event, type: :model do
   end
 end
 
-# describe "GET 'https://co-berlin.org/en/calender'", :type => :feature do
-#   it 'checks if content calendar exists' do
-#     visit('https://co-berlin.org/en/calender')
-#     expect(page).to have_content('Calendar')
-#     puts 'Cool, Calendar exists.'
-#   end
-# end
+describe "GET 'https://co-berlin.org/en/calender'", :type => :feature do
+  it 'checks if content calendar exists' do
+    visit('https://co-berlin.org/en/calender')
+    expect(page).to have_content('Calendar')
+    puts 'Cool, Calendar exists.'
+  end
+end
 
-# describe "GET 'http://berghain.de/events/'", :type => :feature do
-#   it 'checks if content dancefloor exists' do
-#     visit('http://berghain.de/events/')
-#     expect(page).to have_content('Dancefloor')
-#     puts 'Cool, Dancefloor exists.'
-#   end
-# end
+describe "GET 'http://berghain.de/events/'", :type => :feature do
+  it 'checks if content dancefloor exists' do
+    visit('http://berghain.de/events/')
+    expect(page).to have_content('Dancefloor')
+    puts 'Cool, Dancefloor exists.'
+  end
+end
 
-# p "Sleeping for 60 secs"
-# sleep 60
+p "Sleeping for 60 secs"
+sleep 60
 
-# describe "GET 'http://berghain.de/events/'", :type => :feature do
-#   it 'checks if content stage exists' do
-#     visit('http://berghain.de/events')
-#     expect(page).to have_content('Stage')
-#     puts 'Cool, Stage exists.'
-#   end
-# end
+describe "GET 'http://berghain.de/events/'", :type => :feature do
+  it 'checks if content stage exists' do
+    visit('http://berghain.de/events')
+    expect(page).to have_content('Stage')
+    puts 'Cool, Stage exists.'
+  end
+end
