@@ -12,14 +12,13 @@
           <div class='col-lg-4 col-sm-6 portfolio-item mt-4'>
             <div class='card h-100'>
               <%= link_to event.event_url, target: :_blank do %>
-                <%= image_tag event.img_url, class: 'card-img-top' if event.img_url.present? %>
+                <%= image_tag image_url(event.img_url), class: 'card-img-top' %>
                 <div class='card-body'>
                   <h4 class='card-title'>
                     <strong><%= event.title.titleize %></strong>
                   </h4>
-
                   <p class='card-text'><%= event&.category&.titleize %></p>
-                  <p class='card-text'><%= render_date(event&.event_start_date, event&.event_end_date) %></p>
+                  <p class='card-text'><%= show_date(event&.event_start_date, event&.event_end_date) %></p>
                   <p class='card-text'><%= event&.subtitle&.titleize %></p>
                   <p class='card-text'><%= truncate(sanitize(event&.details&.titleize), length: 250) %></p>
                 </div>
