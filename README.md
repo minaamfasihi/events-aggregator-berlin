@@ -6,12 +6,12 @@ This app uses `postgres` database.
 
 1. After creating the database and running migrations, run `rails db:seed` since the seed file contains `WebSources` which contains information about the sites that we are going to scrape.
    
-`app/services/scraping_service.rb` contains the code for scraping!
+   `app/services/scraping_service.rb` contains the code for scraping!
    
 2. Go to rails console, and run the `scrapingservice` for initial data.   
 `s = ScrapingService.new`   
 `s.perform`   
-This could be placed inside `seeds.rb` too!   
+This could also be placed inside `seeds.rb`.   
    
 3. This app uses `sidekiq` to run `ScrapingService` in the background. For scheduling the job every 30 minutes (or 1 hour), we use `sidekiq-scheduler`.    
 `config/sidekiq.yml` contains the schedule for running the service.
