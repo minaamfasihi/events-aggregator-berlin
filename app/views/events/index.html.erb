@@ -1,49 +1,45 @@
 <%= render 'search' %>
+<% if @events.blank? %>
+  <p class='no-results'>Sorry, no results found</p>
+<% else %>
+  <div id='container'>
+    <div class='row'>
+      <% @events.each do |event| %>
+        <% if event.title.present? && event.event_url.present? %>
+          <div class='col-lg-4 col-sm-6 portfolio-item'>
+            <div class='card h-100'>
+              <%= link_to event.event_url, target: :_blank do %>
+                <%= image_tag event.img_url, class: 'card-img-top' if event.img_url.present? %>
+                <div class='card-body'>
+                  <h4 class='card-title'>
+                    <strong><%= event.title.titleize %></strong>
+                  </h4>
 
-<div id='container'>
-  <div class='row'>
-    <div class='col-md-2'></div>
-    <div class='col-md-8'>
-      <div class='panel panel-default'>
-        <div class='panel-body'>
-          <h2 class='text-center'></h2>
-          <div class='clearfix'></div>
-          <table class='table table-striped table-hover'>
-            <thead class='thead-default'>
-            </thead>
-            <tbody>
-              <% if @events.blank? %>
-                <p class='no-results'>Sorry, no results found</p>
-              <% else %>
-                <% @events.each do |event| %>
-                  <% if event.title.present? && event.event_url.present? %>
-                    <tr>
-                      <td>
-                        <div class='row'>
-                          <div class='col-md-3'>
-                            <%= link_to event.event_url, target: :_blank do %>
-                              <p><%= event&.category&.titleize %></p>
-                              <p><%= render_date(event&.event_start_date, event&.event_end_date) %></p>
-                              <h2><strong><%= event.title.titleize %></strong></h2>
-                              <%= image_tag event.img_url, class: 'event-img' if event.img_url.present? %>
-                              <p><%= event&.subtitle&.titleize %></p>
-                              <p class='text-justify'>
-                                <%= truncate(sanitize(event&.details&.titleize), length: 250) %>
-                              </p>
-                            <% end %>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  <% end %>
-                <% end %>
+                  <p class='card-text'>
+                    <%= event&.category&.titleize %>
+                  </p>
+                  <p class='card-text'>
+                    <%= render_date(event&.event_start_date, event&.event_end_date) %>
+                  </p>
+                  <p class='card-text'>
+                    <%= event&.subtitle&.titleize %>
+                  </p>
+                  <p class='card-text'>
+                    <%= truncate(sanitize(event&.details&.titleize), length: 250) %>
+                  </p>
+                </div>
               <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
     </div>
-    <div class='col-md-2'></div>
     <%= paginate @events %>
   </div>
-</div>
+<% end %>
+
+<footer class="py-5 bg-dark">
+  <div class="container">
+    <p class="m-0 text-center text-white">Copyright &copy; Dalia Research 2018</p>
+  </div>
+</footer>
